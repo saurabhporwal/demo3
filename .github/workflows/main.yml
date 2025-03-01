@@ -1,0 +1,17 @@
+name: Demonstrate Secret Retrieval
+
+on:
+  workflow_dispatch:
+
+jobs:
+  show-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if Secret Exists
+        run: |
+          if [ -z "${{ secrets.ARTIFACTORY_SECRET }}" ]; then
+            echo "❌ Secret is NOT set or is empty!"
+          else
+            echo "✅ Secret has been retrieved successfully!"
+            echo "Secret Value: ${{ secrets.ARTIFACTORY_SECRET }}"  # Will be masked in logs
+          fi
